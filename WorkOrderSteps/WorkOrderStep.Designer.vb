@@ -268,6 +268,7 @@ Partial Class WorkOrderStep
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Name = "WorkOrderStep"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         CType(Me.HomeBtn, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ReturnBtn, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

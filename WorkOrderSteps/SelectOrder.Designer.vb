@@ -31,6 +31,8 @@ Partial Class SelectOrder
         Me.SelectBtn = New System.Windows.Forms.Button()
         Me.ReturnBtn = New System.Windows.Forms.PictureBox()
         Me.HomeBtn = New System.Windows.Forms.PictureBox()
+        Me.WorkOrderTxtBox = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ReturnBtn, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeBtn, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -62,13 +64,13 @@ Partial Class SelectOrder
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.DataGridView1.Location = New System.Drawing.Point(12, 34)
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 87)
         Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.RowHeadersVisible = False
         Me.DataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.DataGridView1.Size = New System.Drawing.Size(200, 178)
+        Me.DataGridView1.Size = New System.Drawing.Size(200, 157)
         Me.DataGridView1.TabIndex = 4
         '
         'WorkOrderNumber
@@ -117,6 +119,27 @@ Partial Class SelectOrder
         Me.HomeBtn.TabIndex = 28
         Me.HomeBtn.TabStop = False
         '
+        'WorkOrderTxtBox
+        '
+        Me.WorkOrderTxtBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.WorkOrderTxtBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.WorkOrderTxtBox.Location = New System.Drawing.Point(69, 43)
+        Me.WorkOrderTxtBox.Name = "WorkOrderTxtBox"
+        Me.WorkOrderTxtBox.Size = New System.Drawing.Size(130, 31)
+        Me.WorkOrderTxtBox.TabIndex = 31
+        Me.WorkOrderTxtBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.ForeColor = System.Drawing.Color.White
+        Me.Label5.Location = New System.Drawing.Point(16, 49)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(51, 19)
+        Me.Label5.TabIndex = 30
+        Me.Label5.Text = "WO#:"
+        '
         'SelectOrder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -124,6 +147,8 @@ Partial Class SelectOrder
         Me.BackColor = System.Drawing.Color.Black
         Me.ClientSize = New System.Drawing.Size(224, 281)
         Me.ControlBox = False
+        Me.Controls.Add(Me.WorkOrderTxtBox)
+        Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.ReturnBtn)
         Me.Controls.Add(Me.HomeBtn)
         Me.Controls.Add(Me.RefreshBtn)
@@ -145,4 +170,6 @@ Partial Class SelectOrder
     Friend WithEvents WorkOrderNumber As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ReturnBtn As System.Windows.Forms.PictureBox
     Friend WithEvents HomeBtn As System.Windows.Forms.PictureBox
+    Friend WithEvents WorkOrderTxtBox As System.Windows.Forms.TextBox
+    Friend WithEvents Label5 As System.Windows.Forms.Label
 End Class

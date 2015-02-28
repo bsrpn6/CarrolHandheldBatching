@@ -12,3 +12,18 @@ C:\Users\admin\Documents\Visual Studio 2012\Projects\WorkOrderSteps\WorkOrderSte
 C:\Users\admin\Documents\Visual Studio 2012\Projects\WorkOrderSteps\WorkOrderSteps\obj\Debug\WindowsApplication1.Instructions.resources
 C:\Users\admin\Documents\Visual Studio 2012\Projects\WorkOrderSteps\WorkOrderSteps\obj\Debug\WindowsApplication1.BatchMain.resources
 C:\Users\admin\Documents\Visual Studio 2012\Projects\WorkOrderSteps\WorkOrderSteps\obj\Debug\WindowsApplication1.SelectOrder.resources
+C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\bin\Debug\WorkOrderSteps.exe.config
+C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Debug\WorkOrderSteps.exe
+C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Debug\WorkOrderSteps.xml
+C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Debug\WorkOrderSteps.pdb
+C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\bin\Debug\WorkOrderSteps.exe
+C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\bin\Debug\WorkOrderSteps.pdb
+C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\bin\Debug\WorkOrderSteps.xml
+C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Debug\WindowsApplication1.BatchMain.resources
+C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Debug\WindowsApplication1.Main.resources
+C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Debug\WindowsApplication1.Instructions.resources
+C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Debug\WindowsApplication1.SelectOrder.resources
+C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Debug\WindowsApplication1.WorkOrderStep.resources
+C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Debug\WindowsApplication1.Resources.resources
+C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Debug\WorkOrderSteps.vbproj.GenerateResource.Cache
+C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Debug\WindowsApplication1.CloseWorkOrderStep.resources

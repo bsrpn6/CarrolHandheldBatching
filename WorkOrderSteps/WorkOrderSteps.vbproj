@@ -81,6 +81,13 @@
     <Compile Include="BatchMain.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="DatabaseConnection.vb" />
+    <Compile Include="CloseWorkOrderStep.Designer.vb">
+      <DependentUpon>CloseWorkOrderStep.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CloseWorkOrderStep.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Main.Designer.vb">
       <DependentUpon>Main.vb</DependentUpon>
     </Compile>
@@ -125,6 +132,9 @@
   <ItemGroup>
     <EmbeddedResource Include="BatchMain.resx">
       <DependentUpon>BatchMain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CloseWorkOrderStep.resx">
+      <DependentUpon>CloseWorkOrderStep.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.vb</DependentUpon>

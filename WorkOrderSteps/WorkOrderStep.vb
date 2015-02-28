@@ -5,6 +5,7 @@ Imports System.Data
 Imports System.Data.Common
 Imports System.Data.SqlClient
 
+
 Public Class WorkOrderStep
     Inherits System.Windows.Forms.Form
     'Create ADO.NET objects.
@@ -40,7 +41,7 @@ Public Class WorkOrderStep
         Reset()
 
         'Create a Connection object.
-        myConn = New SqlConnection("Data Source=INBATCHDEV;Initial Catalog=BatchDB;Integrated Security=True")
+        myConn = DatabaseConnection.CreateSQLConnection()
 
         'Create a Command object.
         myCmd = myConn.CreateCommand
@@ -67,7 +68,7 @@ Public Class WorkOrderStep
 
         Loop
 
-        WorkOrderNumberTxtBox.Text = WorkOrderNumber
+        WorkOrderNumberTxtBox.Text = WorkOrderNumber & " - " & StepNumber
         WorkOrderItemTxtBox.Text = WorkOrderItem
         WorkOrderItemDescTxtBox.Text = WorkOrderItemDesc
         WorkOrderStepTargetQtyTxtBox.Text = WorkOrderStepTargetQty & " " & "LBS"
@@ -75,9 +76,11 @@ Public Class WorkOrderStep
         'Close the reader and the database connection.
         myReader.Close()
         myConn.Close()
+
+        CenterToScreen()
         Show()
         WorkOrderStepItemTxtBox.Focus()
-        CenterToScreen()
+
 
     End Sub
 
@@ -111,6 +114,7 @@ Public Class WorkOrderStep
     End Sub
 
     Private Sub ViewInstructionsBtn_Click(sender As Object, e As EventArgs) Handles ViewInstructionsBtn.Click
+        WorkOrderStepItemTxtBox.Focus()
         Dim oForm As Instructions
         oForm = New Instructions(WorkOrderNumber)
         oForm.Show()
@@ -198,43 +202,28 @@ Public Class WorkOrderStep
     End Sub
 
     Private Sub SubmitBtn_Click(sender As Object, e As EventArgs) Handles SubmitBtn.Click
-        'Create a Connection object.
-        myConn = New SqlConnection("Data Source=INBATCHDEV;Initial Catalog=BatchDB;Integrated Security=True")
 
-        'Create a Command object.
-        myCmd = myConn.CreateCommand
-        myCmd.CommandText = "UPDATE [BatchDB].[dbo].[TestWorkOrderSteps] SET [WorkOrderStepItemUsed] = ' " & WorkOrderStepItemTxtBox.Text & " ' ,[WorkOrderLotNumber] = ' " & LotcodeTxtBox.Text & " ' ,[WorkOrderStepQtyUsed] = ' " & QtyTxtBox.Text & " ' ,[Complete] = '1' WHERE [WorkOrderNum] = " & WorkOrderNumber & "AND [StepNum] = " & StepNumber
+        If WorkOrderStepItemTxtBox.Text > "" And LotcodeTxtBox.Text > "" And QtyTxtBox.Text > "" Then
+            'Create a Connection object.
+            myConn = DatabaseConnection.CreateSQLConnection()
 
-        'Open the connection.
-        myConn.Open()
+            'Create a Command object.
+            myCmd = myConn.CreateCommand
+            myCmd.CommandText = "UPDATE [BatchDB].[dbo].[TestWorkOrderSteps] SET [WorkOrderStepItemUsed] = ' " & WorkOrderStepItemTxtBox.Text & " ' ,[WorkOrderLotNumber] = ' " & LotcodeTxtBox.Text & " ' ,[WorkOrderStepQtyUsed] = ' " & QtyTxtBox.Text & " ' ,[Status] = 'ACTV' WHERE [WorkOrderNum] = " & WorkOrderNumber & "AND [StepNum] = " & StepNumber
 
-        myReader = myCmd.ExecuteReader()
+            'Open the connection.
+            myConn.Open()
 
+            myReader = myCmd.ExecuteReader()
 
-        'Concatenate the query result into a string.
-        Do While myReader.Read()
-            WorkOrderNumber = myReader.GetString(0)
-            WorkOrderItem = myReader.GetString(1)
-            WorkOrderItemDesc = myReader.GetString(2)
-            WorkOrderStepItem = myReader.GetString(3)
-            WorkOrderStepItemDesc = myReader.GetString(4)
-            WorkOrderStepTargetQty = myReader.GetInt32(5)
-            WorkOrderStepHiHiDev = myReader.GetInt32(6)
-            WorkOrderStepHiDev = myReader.GetInt32(7)
-            WorkOrderStepLoDev = myReader.GetInt32(8)
-            WorkOrderStepLoLoDev = myReader.GetInt32(9)
+            'Close the reader and the database connection.
+            myReader.Close()
+            myConn.Close()
+            Close()
+        Else
+            MessageBox.Show("Please provide required information.")
+        End If
 
-        Loop
-
-        WorkOrderNumberTxtBox.Text = WorkOrderNumber
-        WorkOrderItemTxtBox.Text = WorkOrderItem
-        WorkOrderItemDescTxtBox.Text = WorkOrderItemDesc
-        WorkOrderStepTargetQtyTxtBox.Text = WorkOrderStepTargetQty & " " & "LBS"
-
-        'Close the reader and the database connection.
-        myReader.Close()
-        myConn.Close()
-        Close()
 
     End Sub
 
@@ -267,4 +256,5 @@ Public Class WorkOrderStep
             QtyTxtBox.Focus()
         End If
     End Sub
+
 End Class

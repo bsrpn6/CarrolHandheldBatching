@@ -22,7 +22,7 @@ Partial Class BatchMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BatchMain))
         Me.TitleLbl = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -36,9 +36,11 @@ Partial Class BatchMain
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.StepNum = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.StepName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Complete = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ReturnBtn = New System.Windows.Forms.PictureBox()
         Me.HomeBtn = New System.Windows.Forms.PictureBox()
         Me.RefreshBtn = New System.Windows.Forms.Button()
+        Me.ActiveStepBtn = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ReturnBtn, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.HomeBtn, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -93,7 +95,7 @@ Partial Class BatchMain
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.White
-        Me.Label4.Location = New System.Drawing.Point(82, 105)
+        Me.Label4.Location = New System.Drawing.Point(82, 95)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(53, 19)
         Me.Label4.TabIndex = 7
@@ -153,17 +155,17 @@ Partial Class BatchMain
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.ColumnHeadersVisible = False
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.StepNum, Me.StepName})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle2
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.StepNum, Me.StepName, Me.Complete})
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically
-        Me.DataGridView1.Location = New System.Drawing.Point(12, 127)
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 117)
         Me.DataGridView1.MultiSelect = False
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.ReadOnly = True
@@ -172,6 +174,7 @@ Partial Class BatchMain
         Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.DataGridView1.Size = New System.Drawing.Size(200, 102)
         Me.DataGridView1.TabIndex = 24
+        Me.DataGridView1.TabStop = False
         '
         'StepNum
         '
@@ -186,6 +189,13 @@ Partial Class BatchMain
         Me.StepName.Name = "StepName"
         Me.StepName.ReadOnly = True
         Me.StepName.Width = 150
+        '
+        'Complete
+        '
+        Me.Complete.HeaderText = "Complete"
+        Me.Complete.Name = "Complete"
+        Me.Complete.ReadOnly = True
+        Me.Complete.Visible = False
         '
         'ReturnBtn
         '
@@ -215,6 +225,16 @@ Partial Class BatchMain
         Me.RefreshBtn.Text = "Refresh"
         Me.RefreshBtn.UseVisualStyleBackColor = True
         '
+        'ActiveStepBtn
+        '
+        Me.ActiveStepBtn.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ActiveStepBtn.Location = New System.Drawing.Point(38, 223)
+        Me.ActiveStepBtn.Name = "ActiveStepBtn"
+        Me.ActiveStepBtn.Size = New System.Drawing.Size(155, 25)
+        Me.ActiveStepBtn.TabIndex = 31
+        Me.ActiveStepBtn.Text = "Active/Next Step"
+        Me.ActiveStepBtn.UseVisualStyleBackColor = True
+        '
         'BatchMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -222,6 +242,7 @@ Partial Class BatchMain
         Me.BackColor = System.Drawing.Color.Black
         Me.ClientSize = New System.Drawing.Size(224, 281)
         Me.ControlBox = False
+        Me.Controls.Add(Me.ActiveStepBtn)
         Me.Controls.Add(Me.RefreshBtn)
         Me.Controls.Add(Me.ReturnBtn)
         Me.Controls.Add(Me.HomeBtn)
@@ -236,6 +257,7 @@ Partial Class BatchMain
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TitleLbl)
         Me.Name = "BatchMain"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ReturnBtn, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HomeBtn, System.ComponentModel.ISupportInitialize).EndInit()
@@ -253,9 +275,11 @@ Partial Class BatchMain
     Friend WithEvents ItemTxtBox As System.Windows.Forms.TextBox
     Friend WithEvents DescTxtBox As System.Windows.Forms.TextBox
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
-    Friend WithEvents StepNum As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents StepName As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ReturnBtn As System.Windows.Forms.PictureBox
     Friend WithEvents HomeBtn As System.Windows.Forms.PictureBox
     Friend WithEvents RefreshBtn As System.Windows.Forms.Button
+    Friend WithEvents StepNum As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents StepName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Complete As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ActiveStepBtn As System.Windows.Forms.Button
 End Class

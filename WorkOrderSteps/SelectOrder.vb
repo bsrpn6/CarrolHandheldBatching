@@ -16,11 +16,14 @@ Public Class SelectOrder
     Private Sub SelectOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Call Load_Orders()
         CenterToScreen()
+        Show()
+        WorkOrderTxtBox.Focus()
+
     End Sub
 
     Private Sub Load_Orders()
         'Create a Connection object.
-        myConn = New SqlConnection("Data Source=INBATCHDEV;Initial Catalog=BatchDB;Integrated Security=True")
+        myConn = DatabaseConnection.CreateSQLConnection()
 
         'Create a Command object.
         myCmd = myConn.CreateCommand
@@ -42,13 +45,12 @@ Public Class SelectOrder
         'Close the reader and the database connection.
         myReader.Close()
         myConn.Close()
-        If DataGridView1.Rows.Count <> 0 Then
-            SelectedValue = DataGridView1.Rows(0).Cells(0).Value
-            SelectedWorkOrder = SelectedValue
-            SelectBtn.Enabled = True
-        Else
-            SelectBtn.Enabled = False
-        End If
+
+        DataGridView1.ClearSelection()
+        SelectedWorkOrder = Nothing
+        WorkOrderTxtBox.Text = Nothing
+        WorkOrderTxtBox.Focus()
+
 
     End Sub
 
@@ -58,7 +60,15 @@ Public Class SelectOrder
     End Sub
 
     Private Sub SelectBtn_Click(sender As Object, e As EventArgs) Handles SelectBtn.Click
+        If SelectedWorkOrder <> Nothing Then
+            Call LoadWorkOrder()
+        Else
+            MessageBox.Show("Please make a selection.")
+        End If
 
+    End Sub
+
+    Private Sub LoadWorkOrder()
         Dim oForm As BatchMain
         oForm = New BatchMain(SelectedWorkOrder)
         oForm.Show()
@@ -66,6 +76,8 @@ Public Class SelectOrder
     End Sub
 
     Private Sub DataGridView1_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+        WorkOrderTxtBox.Text = Nothing
+
         SelectedValue = DataGridView1.Rows(e.RowIndex).Cells(0).Value
 
         If IsDBNull(SelectedValue) Then
@@ -93,6 +105,18 @@ Public Class SelectOrder
 
     Private Sub ReturnBtn_Click_1(sender As Object, e As EventArgs) Handles ReturnBtn.Click
         Me.Close()
+    End Sub
+
+    Private Sub WorkOrderTxtBox_Enter(sender As Object, e As EventArgs) Handles WorkOrderTxtBox.Enter
+        DataGridView1.ClearSelection()
+        SelectedWorkOrder = Nothing
+    End Sub
+
+    Private Sub WorkOrderTxtBox_KeyDown(sender As Object, e As KeyEventArgs) Handles WorkOrderTxtBox.KeyDown
+        If e.KeyData = Keys.Return Then
+            SelectedWorkOrder = WorkOrderTxtBox.Text
+            Call LoadWorkOrder()
+        End If
     End Sub
 End Class
 

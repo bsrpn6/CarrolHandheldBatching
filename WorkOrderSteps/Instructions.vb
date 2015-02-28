@@ -23,7 +23,7 @@ Public Class Instructions
 
     Private Sub HelpForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Create a Connection object.
-        myConn = New SqlConnection("Data Source=INBATCHDEV;Initial Catalog=BatchDB;Integrated Security=True")
+        myConn = DatabaseConnection.CreateSQLConnection()
 
         'Create a Command object.
         myCmd = myConn.CreateCommand

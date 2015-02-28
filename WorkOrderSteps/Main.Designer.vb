@@ -63,9 +63,9 @@ Partial Class Main
         'TitlePix
         '
         Me.TitlePix.Image = CType(resources.GetObject("TitlePix.Image"), System.Drawing.Image)
-        Me.TitlePix.Location = New System.Drawing.Point(17, 12)
+        Me.TitlePix.Location = New System.Drawing.Point(1, 12)
         Me.TitlePix.Name = "TitlePix"
-        Me.TitlePix.Size = New System.Drawing.Size(196, 26)
+        Me.TitlePix.Size = New System.Drawing.Size(226, 26)
         Me.TitlePix.TabIndex = 20
         Me.TitlePix.TabStop = False
         '
