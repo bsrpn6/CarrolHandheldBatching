@@ -25,6 +25,7 @@ Partial Class Instructions
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Instructions))
         Me.InstructionsTxtBox = New System.Windows.Forms.TextBox()
         Me.ReturnBtn = New System.Windows.Forms.PictureBox()
+        Me.SkipStepBtn = New System.Windows.Forms.Button()
         CType(Me.ReturnBtn, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -50,6 +51,18 @@ Partial Class Instructions
         Me.ReturnBtn.TabIndex = 29
         Me.ReturnBtn.TabStop = False
         '
+        'SkipStepBtn
+        '
+        Me.SkipStepBtn.BackColor = System.Drawing.SystemColors.Control
+        Me.SkipStepBtn.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SkipStepBtn.Location = New System.Drawing.Point(35, 252)
+        Me.SkipStepBtn.Name = "SkipStepBtn"
+        Me.SkipStepBtn.Size = New System.Drawing.Size(155, 25)
+        Me.SkipStepBtn.TabIndex = 33
+        Me.SkipStepBtn.Text = "Skip Step"
+        Me.SkipStepBtn.UseVisualStyleBackColor = False
+        Me.SkipStepBtn.Visible = False
+        '
         'Instructions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -57,6 +70,7 @@ Partial Class Instructions
         Me.BackColor = System.Drawing.Color.Black
         Me.ClientSize = New System.Drawing.Size(224, 281)
         Me.ControlBox = False
+        Me.Controls.Add(Me.SkipStepBtn)
         Me.Controls.Add(Me.ReturnBtn)
         Me.Controls.Add(Me.InstructionsTxtBox)
         Me.Name = "Instructions"
@@ -67,4 +81,5 @@ Partial Class Instructions
     End Sub
     Friend WithEvents InstructionsTxtBox As System.Windows.Forms.TextBox
     Friend WithEvents ReturnBtn As System.Windows.Forms.PictureBox
+    Friend WithEvents SkipStepBtn As System.Windows.Forms.Button
 End Class

@@ -8,6 +8,7 @@ Imports System.Data.SqlClient
 
 Public Class WorkOrderStep
     Inherits System.Windows.Forms.Form
+
     'Create ADO.NET objects.
     Private myConn As SqlConnection
     Private myCmd As SqlCommand
@@ -16,24 +17,26 @@ Public Class WorkOrderStep
 
     Dim WorkOrderNumber As String
     Dim StepNumber As Integer
+    Dim BatchID As Integer
     Dim WorkOrderItem As String
     Dim WorkOrderItemDesc As String
-    Dim WorkOrderStepItem As String
     Dim WorkOrderStepItemDesc As String
-    Dim WorkOrderStepTargetQty As Integer
-    Dim WorkOrderStepHiHiDev As Integer
-    Dim WorkOrderStepHiDev As Integer
-    Dim WorkOrderStepLoDev As Integer
-    Dim WorkOrderStepLoLoDev As Integer
+    Dim WorkOrderStepTargetQty As Single
+    Dim WorkOrderStepHiHiDev As Single
+    Dim WorkOrderStepHiDev As Single
+    Dim WorkOrderStepLoDev As Single
+    Dim WorkOrderStepLoLoDev As Single
+    Dim ParamUOM As String
     Dim InstructionsNotViewed As Boolean = True
     Dim QtyTxtBoxHiLo As Boolean = False
     Dim QtyTxtBoxHiHiLoLo As Boolean = False
     Dim WorkOrderStepItemIncorrect As Boolean = False
 
-    Public Sub New(ByVal PassedWorkOrderNumber As String, ByVal PassedStepNumber As String)
+    Public Sub New(ByVal PassedWorkOrderNumber As String, ByVal PassedStepNumber As String, ByVal PassedBatchID As Integer)
         InitializeComponent()
         WorkOrderNumber = PassedWorkOrderNumber
         StepNumber = PassedStepNumber
+        BatchID = PassedBatchID
     End Sub
 
     Private Sub MainFrm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -45,7 +48,7 @@ Public Class WorkOrderStep
 
         'Create a Command object.
         myCmd = myConn.CreateCommand
-        myCmd.CommandText = "SELECT [WorkOrderNum] ,[WorkOrderItem] ,[WorkOrderItemDesc] ,[WorkOrderStepItem] ,[WorkOrderStepItemDesc] ,[WorkOrderStepTargetQty] ,[WorkOrderStepHiHiDev] ,[WorkOrderStepHiDev] ,[WorkOrderStepLoDev] ,[WorkOrderStepLoLoDev]FROM [BatchDB].[dbo].[TestWorkOrderSteps] WHERE [WorkOrderNum] = " & WorkOrderNumber & "AND [StepNum] = " & StepNumber
+        myCmd.CommandText = "SELECT [StepItem] ,[StepItemDesc] ,[ParamTarget] ,[ParamHiHiDev] ,[ParamHiDev] ,[ParamLoDev] ,[ParamLoLoDev], [ParamUOM] FROM [BatchDB].[dbo].[baBatchSteps] WHERE [BatchID] = " & BatchID & "AND [StepNum] = " & StepNumber
 
         'Open the connection.
         myConn.Open()
@@ -55,23 +58,21 @@ Public Class WorkOrderStep
 
         'Concatenate the query result into a string.
         Do While myReader.Read()
-            WorkOrderNumber = myReader.GetString(0)
-            WorkOrderItem = myReader.GetString(1)
-            WorkOrderItemDesc = myReader.GetString(2)
-            WorkOrderStepItem = myReader.GetString(3)
-            WorkOrderStepItemDesc = myReader.GetString(4)
-            WorkOrderStepTargetQty = myReader.GetInt32(5)
-            WorkOrderStepHiHiDev = myReader.GetInt32(6)
-            WorkOrderStepHiDev = myReader.GetInt32(7)
-            WorkOrderStepLoDev = myReader.GetInt32(8)
-            WorkOrderStepLoLoDev = myReader.GetInt32(9)
+            WorkOrderItem = myReader.GetString(0)
+            WorkOrderItemDesc = myReader.GetString(1)
+            WorkOrderStepTargetQty = myReader.GetSqlSingle(2)
+            WorkOrderStepHiHiDev = myReader.GetSqlSingle(3)
+            WorkOrderStepHiDev = myReader.GetSqlSingle(4)
+            WorkOrderStepLoDev = myReader.GetSqlSingle(5)
+            WorkOrderStepLoLoDev = myReader.GetSqlSingle(6)
+            ParamUOM = myReader.GetString(7)
 
         Loop
 
         WorkOrderNumberTxtBox.Text = WorkOrderNumber & " - " & StepNumber
         WorkOrderItemTxtBox.Text = WorkOrderItem
         WorkOrderItemDescTxtBox.Text = WorkOrderItemDesc
-        WorkOrderStepTargetQtyTxtBox.Text = WorkOrderStepTargetQty & " " & "LBS"
+        WorkOrderStepTargetQtyTxtBox.Text = WorkOrderStepTargetQty & " " & ParamUOM
 
         'Close the reader and the database connection.
         myReader.Close()
@@ -116,7 +117,7 @@ Public Class WorkOrderStep
     Private Sub ViewInstructionsBtn_Click(sender As Object, e As EventArgs) Handles ViewInstructionsBtn.Click
         WorkOrderStepItemTxtBox.Focus()
         Dim oForm As Instructions
-        oForm = New Instructions(WorkOrderNumber)
+        oForm = New Instructions(WorkOrderNumber, BatchID, StepNumber)
         oForm.Show()
         oForm = Nothing
         InstructionsNotViewed = False
@@ -201,7 +202,7 @@ Public Class WorkOrderStep
 
     End Sub
 
-    Private Sub SubmitBtn_Click(sender As Object, e As EventArgs) Handles SubmitBtn.Click
+    Public Sub SubmitBtn_Click(sender As Object, e As EventArgs) Handles SubmitBtn.Click
 
         If WorkOrderStepItemTxtBox.Text > "" And LotcodeTxtBox.Text > "" And QtyTxtBox.Text > "" Then
             'Create a Connection object.
@@ -209,7 +210,7 @@ Public Class WorkOrderStep
 
             'Create a Command object.
             myCmd = myConn.CreateCommand
-            myCmd.CommandText = "UPDATE [BatchDB].[dbo].[TestWorkOrderSteps] SET [WorkOrderStepItemUsed] = ' " & WorkOrderStepItemTxtBox.Text & " ' ,[WorkOrderLotNumber] = ' " & LotcodeTxtBox.Text & " ' ,[WorkOrderStepQtyUsed] = ' " & QtyTxtBox.Text & " ' ,[Status] = 'ACTV' WHERE [WorkOrderNum] = " & WorkOrderNumber & "AND [StepNum] = " & StepNumber
+            myCmd.CommandText = "UPDATE [BatchDB].[dbo].[baBatchSteps] SET [LotNumber] = ' " & LotcodeTxtBox.Text & " ', [ParamActual] = ' " & QtyTxtBox.Text & " ', [StepStatus] = 'ACTV', [StepStartDate] = '" & Date.Now.ToString("yyyy-MM-dd HHH:mm:ss") & "' WHERE [BatchID] = " & BatchID & "AND [StepNum] = " & StepNumber
 
             'Open the connection.
             myConn.Open()
@@ -219,6 +220,12 @@ Public Class WorkOrderStep
             'Close the reader and the database connection.
             myReader.Close()
             myConn.Close()
+
+            Dim oForm As CloseWorkOrderStep
+            oForm = New CloseWorkOrderStep(WorkOrderNumber, BatchID, StepNumber)
+            oForm.Show()
+            oForm = Nothing
+
             Close()
         Else
             MessageBox.Show("Please provide required information.")

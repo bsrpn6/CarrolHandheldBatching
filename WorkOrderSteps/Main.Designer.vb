@@ -26,30 +26,34 @@ Partial Class Main
         Me.SelectOrderBtn = New System.Windows.Forms.Button()
         Me.SelectAssetBtn = New System.Windows.Forms.Button()
         Me.CloseApplication = New System.Windows.Forms.PictureBox()
-        Me.TitlePix = New System.Windows.Forms.PictureBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.TestResetBtn = New System.Windows.Forms.Button()
         CType(Me.CloseApplication, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TitlePix, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'SelectOrderBtn
         '
+        Me.SelectOrderBtn.BackColor = System.Drawing.SystemColors.Control
         Me.SelectOrderBtn.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SelectOrderBtn.Location = New System.Drawing.Point(12, 44)
+        Me.SelectOrderBtn.Location = New System.Drawing.Point(12, 87)
         Me.SelectOrderBtn.Name = "SelectOrderBtn"
         Me.SelectOrderBtn.Size = New System.Drawing.Size(200, 32)
         Me.SelectOrderBtn.TabIndex = 5
         Me.SelectOrderBtn.Text = "Select Order"
-        Me.SelectOrderBtn.UseVisualStyleBackColor = True
+        Me.SelectOrderBtn.UseVisualStyleBackColor = False
         '
         'SelectAssetBtn
         '
+        Me.SelectAssetBtn.BackColor = System.Drawing.SystemColors.Control
         Me.SelectAssetBtn.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SelectAssetBtn.Location = New System.Drawing.Point(12, 82)
+        Me.SelectAssetBtn.Location = New System.Drawing.Point(12, 125)
         Me.SelectAssetBtn.Name = "SelectAssetBtn"
         Me.SelectAssetBtn.Size = New System.Drawing.Size(200, 32)
         Me.SelectAssetBtn.TabIndex = 6
         Me.SelectAssetBtn.Text = "Select Asset"
-        Me.SelectAssetBtn.UseVisualStyleBackColor = True
+        Me.SelectAssetBtn.UseVisualStyleBackColor = False
         '
         'CloseApplication
         '
@@ -60,14 +64,36 @@ Partial Class Main
         Me.CloseApplication.TabIndex = 19
         Me.CloseApplication.TabStop = False
         '
-        'TitlePix
+        'PictureBox1
         '
-        Me.TitlePix.Image = CType(resources.GetObject("TitlePix.Image"), System.Drawing.Image)
-        Me.TitlePix.Location = New System.Drawing.Point(1, 12)
-        Me.TitlePix.Name = "TitlePix"
-        Me.TitlePix.Size = New System.Drawing.Size(226, 26)
-        Me.TitlePix.TabIndex = 20
-        Me.TitlePix.TabStop = False
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(15, 5)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(194, 50)
+        Me.PictureBox1.TabIndex = 20
+        Me.PictureBox1.TabStop = False
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.White
+        Me.Label1.Location = New System.Drawing.Point(43, 60)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(139, 19)
+        Me.Label1.TabIndex = 21
+        Me.Label1.Text = "Batching System"
+        '
+        'TestResetBtn
+        '
+        Me.TestResetBtn.BackColor = System.Drawing.SystemColors.Control
+        Me.TestResetBtn.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TestResetBtn.Location = New System.Drawing.Point(12, 199)
+        Me.TestResetBtn.Name = "TestResetBtn"
+        Me.TestResetBtn.Size = New System.Drawing.Size(200, 32)
+        Me.TestResetBtn.TabIndex = 22
+        Me.TestResetBtn.Text = "TEST RESET"
+        Me.TestResetBtn.UseVisualStyleBackColor = False
         '
         'Main
         '
@@ -76,18 +102,23 @@ Partial Class Main
         Me.BackColor = System.Drawing.Color.Black
         Me.ClientSize = New System.Drawing.Size(224, 281)
         Me.ControlBox = False
-        Me.Controls.Add(Me.TitlePix)
+        Me.Controls.Add(Me.TestResetBtn)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.CloseApplication)
         Me.Controls.Add(Me.SelectAssetBtn)
         Me.Controls.Add(Me.SelectOrderBtn)
         Me.Name = "Main"
         CType(Me.CloseApplication, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TitlePix, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents SelectOrderBtn As System.Windows.Forms.Button
     Friend WithEvents SelectAssetBtn As System.Windows.Forms.Button
     Friend WithEvents CloseApplication As System.Windows.Forms.PictureBox
-    Friend WithEvents TitlePix As System.Windows.Forms.PictureBox
+    Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents TestResetBtn As System.Windows.Forms.Button
 End Class

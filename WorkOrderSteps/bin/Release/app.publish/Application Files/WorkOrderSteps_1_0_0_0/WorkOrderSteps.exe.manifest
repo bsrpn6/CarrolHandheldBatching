@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="WorkOrderSteps.exe" version="1.0.0.0" publicKeyToken="283dac1d3635b242" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="WorkOrderSteps" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="WorkOrderSteps.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="WorkOrderSteps.exe" size="297984">
+      <assemblyIdentity name="WorkOrderSteps" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>TY+zngF9CjXQ462TfGT7s32SLq9d8Ftp5Qi0vVQuUj8=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="WorkOrderSteps.exe.config" size="518">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>mjClUPgTrTI2meRmAxvneBoAToMQbI7f7T5RPdn2G8U=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=Win8x64\admin" issuerKeyHash="5e519c4fc9940d35c2199e16cf160e19dc42c791" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>iiYPZbjXOiPmaDxyMr1RY9ig4nfBxXX1MKJgGIM147c=</DigestValue></Reference></SignedInfo><SignatureValue>ylRr4NCqA3sfModqN7Ot94d+Egr1cpSUl0fItFOY7x356uknKwJ3GuSBcYlUW2S7qmINsZ0OTQKO0ojO81MuXq61a581C8JOP72eZ4wgtYmGkXJNKdURDUV9IEKPujZ7nm8xO5lENl9zdwM1oo6wLcqu0DlnNGZkOArC5LVouNs=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>5zxvE+loiN9Og632faKRNaLX/tzMst9s0Sl2xrGm+l2X/rfj9kBRqsuxZB+v2etaM6H1Tsz30Jzm52igNnqZPP5u3aru1VcGV7Vu6cepCLvBaX9mzRDavtRneGGAekDf3fui70AXIqDfPMBI12ImINuEhJfzVY+KIKzG8oOIl1s=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="b7e335831860a230f575c5c177e2a0d86351bd32723c68e6233ad7b8650f268a" Description="" Url=""><as:assemblyIdentity name="WorkOrderSteps.exe" version="1.0.0.0" publicKeyToken="283dac1d3635b242" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=Win8x64\admin</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>wQZnTl7Z6IvpxK/dNg4Uy+bU4dXBYmPN7BT1RiwJcZg=</DigestValue></Reference></SignedInfo><SignatureValue>x0PqhsVRrHGefTolD0XYnKD0nnme7wOjQwLzcrn8KWJA9BWePld7SunejmfLHWfg4dM6GSltEOoP4KuRwjNNKU2Y4WMxm5SzcUnrIl6FALp4K+qQGufNnyKgK6e+3qtStlTv24K/lfWHrkp8FFEv4XTJcHkhkssNcKHYo5jy5go=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>5zxvE+loiN9Og632faKRNaLX/tzMst9s0Sl2xrGm+l2X/rfj9kBRqsuxZB+v2etaM6H1Tsz30Jzm52igNnqZPP5u3aru1VcGV7Vu6cepCLvBaX9mzRDavtRneGGAekDf3fui70AXIqDfPMBI12ImINuEhJfzVY+KIKzG8oOIl1s=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIBzTCCATagAwIBAgIQFdMhtToWKqlIu8VdYv1wzjANBgkqhkiG9w0BAQsFADAlMSMwIQYDVQQDHhoAVwBpAG4AOAB4ADYANABcAGEAZABtAGkAbjAeFw0xNTAzMDIyMDUwNDdaFw0xNjAzMDIwMjUwNDdaMCUxIzAhBgNVBAMeGgBXAGkAbgA4AHgANgA0AFwAYQBkAG0AaQBuMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDnPG8T6WiI306DrfZ9opE1otf+3Myy32zRKXbGsab6XZf+t+P2QFGqy7FkH6/Z61ozofVOzPfQnObnaKA2epk8/m7dqu7VVwZXtW7px6kIu8Fpf2bNENq+1Gd4YYB6QN/d+6LvQBcioN88wEjXYiYg24SEl/NVj4ogrMbyg4iXWwIDAQABMA0GCSqGSIb3DQEBCwUAA4GBAFXY1KEwW955RBi1UlmHICNS2DX2K8RJcvd5P0MFnhpVDubMlCobpcpExqP+Q79SUIXJqDGKHEksA/NpFAWVXzdGcIlYPlnxp/octwsKkjgnVHV8iKgPZvp/LeRFkBfvbZf30PWmRmUzHQCGTjziTdRMBLeE8m4r+906eRV8b+yT</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

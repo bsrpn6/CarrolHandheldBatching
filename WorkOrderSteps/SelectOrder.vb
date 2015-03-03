@@ -11,7 +11,8 @@ Public Class SelectOrder
     Private myReader As SqlDataReader
 
     Dim SelectedWorkOrder As String
-    Dim SelectedValue As Object
+    Dim SelectedWorkOrderValue As Object
+    Dim SelectedBatchID As Integer
 
     Private Sub SelectOrder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Call Load_Orders()
@@ -27,7 +28,7 @@ Public Class SelectOrder
 
         'Create a Command object.
         myCmd = myConn.CreateCommand
-        myCmd.CommandText = "SELECT [WorkOrderNumber] FROM [BatchDB].[dbo].[WorkOrderHeader] WHERE [OpenOrClosed] = 'True'"
+        myCmd.CommandText = "SELECT [WorkOrder], [BatchID] FROM [BatchDB].[dbo].[baBatches] WHERE [BatchStatus] = 'OPEN'"
 
         'Open the connection.
         myConn.Open()
@@ -40,6 +41,7 @@ Public Class SelectOrder
         Do While myReader.Read()
             n = DataGridView1.Rows.Add()
             DataGridView1.Rows.Item(n).Cells(0).Value = myReader.GetString(0)
+            DataGridView1.Rows.Item(n).Cells(1).Value = myReader.GetInt32(1)
         Loop
 
         'Close the reader and the database connection.
@@ -51,7 +53,29 @@ Public Class SelectOrder
         WorkOrderTxtBox.Text = Nothing
         WorkOrderTxtBox.Focus()
 
+    End Sub
 
+    Private Sub RetrieveBatchOrderID()
+        'Create a Connection object.
+        myConn = DatabaseConnection.CreateSQLConnection()
+
+        'Create a Command object.
+        myCmd = myConn.CreateCommand
+        myCmd.CommandText = "SELECT [BatchID] FROM [BatchDB].[dbo].[baBatches] WHERE [WorkOrder] = '" & SelectedWorkOrder & "'"
+
+        'Open the connection.
+        myConn.Open()
+
+        myReader = myCmd.ExecuteReader()
+
+        'Concatenate the query result into a string.
+        Do While myReader.Read()
+            SelectedBatchID = myReader.GetInt32(0)
+        Loop
+
+        'Close the reader and the database connection.
+        myReader.Close()
+        myConn.Close()
     End Sub
 
     Private Sub RefreshBtn_Click(sender As Object, e As EventArgs) Handles RefreshBtn.Click
@@ -61,6 +85,7 @@ Public Class SelectOrder
 
     Private Sub SelectBtn_Click(sender As Object, e As EventArgs) Handles SelectBtn.Click
         If SelectedWorkOrder <> Nothing Then
+            Call RetrieveBatchOrderID()
             Call LoadWorkOrder()
         Else
             MessageBox.Show("Please make a selection.")
@@ -70,7 +95,7 @@ Public Class SelectOrder
 
     Private Sub LoadWorkOrder()
         Dim oForm As BatchMain
-        oForm = New BatchMain(SelectedWorkOrder)
+        oForm = New BatchMain(SelectedWorkOrder, SelectedBatchID)
         oForm.Show()
         oForm = Nothing
     End Sub
@@ -78,12 +103,12 @@ Public Class SelectOrder
     Private Sub DataGridView1_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
         WorkOrderTxtBox.Text = Nothing
 
-        SelectedValue = DataGridView1.Rows(e.RowIndex).Cells(0).Value
+        SelectedWorkOrderValue = DataGridView1.Rows(e.RowIndex).Cells(0).Value
 
-        If IsDBNull(SelectedValue) Then
+        If IsDBNull(SelectedWorkOrderValue) Then
             SelectedWorkOrder = "" ' blank if dbnull values
         Else
-            SelectedWorkOrder = CType(SelectedValue, String)
+            SelectedWorkOrder = CType(SelectedWorkOrderValue, String)
         End If
     End Sub
 
@@ -115,6 +140,7 @@ Public Class SelectOrder
     Private Sub WorkOrderTxtBox_KeyDown(sender As Object, e As KeyEventArgs) Handles WorkOrderTxtBox.KeyDown
         If e.KeyData = Keys.Return Then
             SelectedWorkOrder = WorkOrderTxtBox.Text
+            Call RetrieveBatchOrderID()
             Call LoadWorkOrder()
         End If
     End Sub

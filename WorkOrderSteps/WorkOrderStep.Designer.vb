@@ -30,7 +30,6 @@ Partial Class WorkOrderStep
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.WorkOrderNumberTxtBox = New System.Windows.Forms.TextBox()
         Me.WorkOrderItemTxtBox = New System.Windows.Forms.TextBox()
         Me.WorkOrderItemDescTxtBox = New System.Windows.Forms.TextBox()
         Me.WorkOrderStepTargetQtyTxtBox = New System.Windows.Forms.TextBox()
@@ -41,6 +40,7 @@ Partial Class WorkOrderStep
         Me.SubmitBtn = New System.Windows.Forms.Button()
         Me.HomeBtn = New System.Windows.Forms.PictureBox()
         Me.ReturnBtn = New System.Windows.Forms.PictureBox()
+        Me.WorkOrderNumberTxtBox = New System.Windows.Forms.TextBox()
         CType(Me.HomeBtn, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ReturnBtn, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -50,18 +50,18 @@ Partial Class WorkOrderStep
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.White
-        Me.Label1.Location = New System.Drawing.Point(3, 9)
+        Me.Label1.Location = New System.Drawing.Point(12, 9)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(102, 19)
+        Me.Label1.Size = New System.Drawing.Size(90, 19)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Work Order:"
+        Me.Label1.Text = "Step Num:"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.White
-        Me.Label2.Location = New System.Drawing.Point(3, 31)
+        Me.Label2.Location = New System.Drawing.Point(12, 31)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(74, 19)
         Me.Label2.TabIndex = 1
@@ -72,7 +72,7 @@ Partial Class WorkOrderStep
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.White
-        Me.Label4.Location = New System.Drawing.Point(3, 76)
+        Me.Label4.Location = New System.Drawing.Point(12, 77)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(93, 19)
         Me.Label4.TabIndex = 3
@@ -80,20 +80,21 @@ Partial Class WorkOrderStep
         '
         'ViewInstructionsBtn
         '
+        Me.ViewInstructionsBtn.BackColor = System.Drawing.SystemColors.Control
         Me.ViewInstructionsBtn.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ViewInstructionsBtn.Location = New System.Drawing.Point(12, 102)
         Me.ViewInstructionsBtn.Name = "ViewInstructionsBtn"
         Me.ViewInstructionsBtn.Size = New System.Drawing.Size(200, 32)
         Me.ViewInstructionsBtn.TabIndex = 4
         Me.ViewInstructionsBtn.Text = "View Instructions"
-        Me.ViewInstructionsBtn.UseVisualStyleBackColor = True
+        Me.ViewInstructionsBtn.UseVisualStyleBackColor = False
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.White
-        Me.Label5.Location = New System.Drawing.Point(29, 145)
+        Me.Label5.Location = New System.Drawing.Point(21, 145)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(48, 19)
         Me.Label5.TabIndex = 5
@@ -104,7 +105,7 @@ Partial Class WorkOrderStep
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.White
-        Me.Label6.Location = New System.Drawing.Point(29, 184)
+        Me.Label6.Location = New System.Drawing.Point(21, 182)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(45, 19)
         Me.Label6.TabIndex = 6
@@ -115,24 +116,11 @@ Partial Class WorkOrderStep
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.Color.White
-        Me.Label7.Location = New System.Drawing.Point(29, 220)
+        Me.Label7.Location = New System.Drawing.Point(21, 220)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(46, 19)
         Me.Label7.TabIndex = 7
         Me.Label7.Text = "QTY:"
-        '
-        'WorkOrderNumberTxtBox
-        '
-        Me.WorkOrderNumberTxtBox.BackColor = System.Drawing.Color.Black
-        Me.WorkOrderNumberTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.WorkOrderNumberTxtBox.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.WorkOrderNumberTxtBox.ForeColor = System.Drawing.Color.White
-        Me.WorkOrderNumberTxtBox.Location = New System.Drawing.Point(111, 9)
-        Me.WorkOrderNumberTxtBox.Name = "WorkOrderNumberTxtBox"
-        Me.WorkOrderNumberTxtBox.ReadOnly = True
-        Me.WorkOrderNumberTxtBox.Size = New System.Drawing.Size(100, 19)
-        Me.WorkOrderNumberTxtBox.TabIndex = 10
-        Me.WorkOrderNumberTxtBox.TabStop = False
         '
         'WorkOrderItemTxtBox
         '
@@ -140,10 +128,10 @@ Partial Class WorkOrderStep
         Me.WorkOrderItemTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.WorkOrderItemTxtBox.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.WorkOrderItemTxtBox.ForeColor = System.Drawing.Color.White
-        Me.WorkOrderItemTxtBox.Location = New System.Drawing.Point(113, 31)
+        Me.WorkOrderItemTxtBox.Location = New System.Drawing.Point(92, 31)
         Me.WorkOrderItemTxtBox.Name = "WorkOrderItemTxtBox"
         Me.WorkOrderItemTxtBox.ReadOnly = True
-        Me.WorkOrderItemTxtBox.Size = New System.Drawing.Size(100, 19)
+        Me.WorkOrderItemTxtBox.Size = New System.Drawing.Size(117, 19)
         Me.WorkOrderItemTxtBox.TabIndex = 11
         Me.WorkOrderItemTxtBox.TabStop = False
         '
@@ -167,10 +155,10 @@ Partial Class WorkOrderStep
         Me.WorkOrderStepTargetQtyTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.WorkOrderStepTargetQtyTxtBox.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.WorkOrderStepTargetQtyTxtBox.ForeColor = System.Drawing.Color.White
-        Me.WorkOrderStepTargetQtyTxtBox.Location = New System.Drawing.Point(111, 79)
+        Me.WorkOrderStepTargetQtyTxtBox.Location = New System.Drawing.Point(111, 77)
         Me.WorkOrderStepTargetQtyTxtBox.Name = "WorkOrderStepTargetQtyTxtBox"
         Me.WorkOrderStepTargetQtyTxtBox.ReadOnly = True
-        Me.WorkOrderStepTargetQtyTxtBox.Size = New System.Drawing.Size(100, 19)
+        Me.WorkOrderStepTargetQtyTxtBox.Size = New System.Drawing.Size(98, 19)
         Me.WorkOrderStepTargetQtyTxtBox.TabIndex = 13
         Me.WorkOrderStepTargetQtyTxtBox.TabStop = False
         '
@@ -178,7 +166,7 @@ Partial Class WorkOrderStep
         '
         Me.WorkOrderStepItemTxtBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.WorkOrderStepItemTxtBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.WorkOrderStepItemTxtBox.Location = New System.Drawing.Point(82, 139)
+        Me.WorkOrderStepItemTxtBox.Location = New System.Drawing.Point(74, 139)
         Me.WorkOrderStepItemTxtBox.Name = "WorkOrderStepItemTxtBox"
         Me.WorkOrderStepItemTxtBox.Size = New System.Drawing.Size(130, 31)
         Me.WorkOrderStepItemTxtBox.TabIndex = 14
@@ -188,7 +176,7 @@ Partial Class WorkOrderStep
         '
         Me.LotcodeTxtBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.LotcodeTxtBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LotcodeTxtBox.Location = New System.Drawing.Point(82, 175)
+        Me.LotcodeTxtBox.Location = New System.Drawing.Point(74, 176)
         Me.LotcodeTxtBox.Name = "LotcodeTxtBox"
         Me.LotcodeTxtBox.Size = New System.Drawing.Size(130, 31)
         Me.LotcodeTxtBox.TabIndex = 15
@@ -198,7 +186,7 @@ Partial Class WorkOrderStep
         '
         Me.QtyTxtBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.QtyTxtBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.QtyTxtBox.Location = New System.Drawing.Point(82, 212)
+        Me.QtyTxtBox.Location = New System.Drawing.Point(74, 214)
         Me.QtyTxtBox.Name = "QtyTxtBox"
         Me.QtyTxtBox.Size = New System.Drawing.Size(130, 31)
         Me.QtyTxtBox.TabIndex = 16
@@ -206,23 +194,25 @@ Partial Class WorkOrderStep
         '
         'ClearBtn
         '
+        Me.ClearBtn.BackColor = System.Drawing.SystemColors.Control
         Me.ClearBtn.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ClearBtn.Location = New System.Drawing.Point(117, 252)
+        Me.ClearBtn.Location = New System.Drawing.Point(115, 252)
         Me.ClearBtn.Name = "ClearBtn"
         Me.ClearBtn.Size = New System.Drawing.Size(75, 25)
         Me.ClearBtn.TabIndex = 25
         Me.ClearBtn.Text = "Clear"
-        Me.ClearBtn.UseVisualStyleBackColor = True
+        Me.ClearBtn.UseVisualStyleBackColor = False
         '
         'SubmitBtn
         '
+        Me.SubmitBtn.BackColor = System.Drawing.SystemColors.Control
         Me.SubmitBtn.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SubmitBtn.Location = New System.Drawing.Point(37, 252)
+        Me.SubmitBtn.Location = New System.Drawing.Point(35, 252)
         Me.SubmitBtn.Name = "SubmitBtn"
         Me.SubmitBtn.Size = New System.Drawing.Size(75, 25)
         Me.SubmitBtn.TabIndex = 24
-        Me.SubmitBtn.Text = "Submit"
-        Me.SubmitBtn.UseVisualStyleBackColor = True
+        Me.SubmitBtn.Text = "Start"
+        Me.SubmitBtn.UseVisualStyleBackColor = False
         '
         'HomeBtn
         '
@@ -241,6 +231,19 @@ Partial Class WorkOrderStep
         Me.ReturnBtn.Size = New System.Drawing.Size(25, 25)
         Me.ReturnBtn.TabIndex = 27
         Me.ReturnBtn.TabStop = False
+        '
+        'WorkOrderNumberTxtBox
+        '
+        Me.WorkOrderNumberTxtBox.BackColor = System.Drawing.Color.Black
+        Me.WorkOrderNumberTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.WorkOrderNumberTxtBox.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.WorkOrderNumberTxtBox.ForeColor = System.Drawing.Color.White
+        Me.WorkOrderNumberTxtBox.Location = New System.Drawing.Point(108, 9)
+        Me.WorkOrderNumberTxtBox.Name = "WorkOrderNumberTxtBox"
+        Me.WorkOrderNumberTxtBox.ReadOnly = True
+        Me.WorkOrderNumberTxtBox.Size = New System.Drawing.Size(101, 19)
+        Me.WorkOrderNumberTxtBox.TabIndex = 10
+        Me.WorkOrderNumberTxtBox.TabStop = False
         '
         'WorkOrderStep
         '
@@ -282,7 +285,6 @@ Partial Class WorkOrderStep
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents WorkOrderNumberTxtBox As System.Windows.Forms.TextBox
     Friend WithEvents WorkOrderItemTxtBox As System.Windows.Forms.TextBox
     Friend WithEvents WorkOrderItemDescTxtBox As System.Windows.Forms.TextBox
     Friend WithEvents WorkOrderStepTargetQtyTxtBox As System.Windows.Forms.TextBox
@@ -293,5 +295,6 @@ Partial Class WorkOrderStep
     Friend WithEvents SubmitBtn As System.Windows.Forms.Button
     Friend WithEvents HomeBtn As System.Windows.Forms.PictureBox
     Friend WithEvents ReturnBtn As System.Windows.Forms.PictureBox
+    Friend WithEvents WorkOrderNumberTxtBox As System.Windows.Forms.TextBox
 
 End Class

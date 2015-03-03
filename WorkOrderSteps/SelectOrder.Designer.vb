@@ -26,7 +26,8 @@ Partial Class SelectOrder
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SelectOrder))
         Me.TitleLbl = New System.Windows.Forms.Label()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.WorkOrderNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.WorkOrder = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.BatchID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.RefreshBtn = New System.Windows.Forms.Button()
         Me.SelectBtn = New System.Windows.Forms.Button()
         Me.ReturnBtn = New System.Windows.Forms.PictureBox()
@@ -43,7 +44,7 @@ Partial Class SelectOrder
         Me.TitleLbl.AutoSize = True
         Me.TitleLbl.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TitleLbl.ForeColor = System.Drawing.Color.White
-        Me.TitleLbl.Location = New System.Drawing.Point(51, 9)
+        Me.TitleLbl.Location = New System.Drawing.Point(49, 9)
         Me.TitleLbl.Name = "TitleLbl"
         Me.TitleLbl.Size = New System.Drawing.Size(126, 22)
         Me.TitleLbl.TabIndex = 3
@@ -54,7 +55,7 @@ Partial Class SelectOrder
         Me.DataGridView1.AllowUserToAddRows = False
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.ColumnHeadersVisible = False
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.WorkOrderNumber})
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.WorkOrder, Me.BatchID})
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
         DataGridViewCellStyle1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -73,33 +74,42 @@ Partial Class SelectOrder
         Me.DataGridView1.Size = New System.Drawing.Size(200, 157)
         Me.DataGridView1.TabIndex = 4
         '
-        'WorkOrderNumber
+        'WorkOrder
         '
-        Me.WorkOrderNumber.FillWeight = 120.0!
-        Me.WorkOrderNumber.HeaderText = "Work Order #:"
-        Me.WorkOrderNumber.Name = "WorkOrderNumber"
-        Me.WorkOrderNumber.ReadOnly = True
-        Me.WorkOrderNumber.Width = 200
+        Me.WorkOrder.FillWeight = 120.0!
+        Me.WorkOrder.HeaderText = "Work Order:"
+        Me.WorkOrder.Name = "WorkOrder"
+        Me.WorkOrder.ReadOnly = True
+        Me.WorkOrder.Width = 200
+        '
+        'BatchID
+        '
+        Me.BatchID.HeaderText = "BatchID"
+        Me.BatchID.Name = "BatchID"
+        Me.BatchID.ReadOnly = True
+        Me.BatchID.Visible = False
         '
         'RefreshBtn
         '
+        Me.RefreshBtn.BackColor = System.Drawing.SystemColors.Control
         Me.RefreshBtn.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RefreshBtn.Location = New System.Drawing.Point(118, 252)
+        Me.RefreshBtn.Location = New System.Drawing.Point(115, 252)
         Me.RefreshBtn.Name = "RefreshBtn"
         Me.RefreshBtn.Size = New System.Drawing.Size(75, 25)
         Me.RefreshBtn.TabIndex = 23
         Me.RefreshBtn.Text = "Refresh"
-        Me.RefreshBtn.UseVisualStyleBackColor = True
+        Me.RefreshBtn.UseVisualStyleBackColor = False
         '
         'SelectBtn
         '
+        Me.SelectBtn.BackColor = System.Drawing.SystemColors.Control
         Me.SelectBtn.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SelectBtn.Location = New System.Drawing.Point(38, 252)
+        Me.SelectBtn.Location = New System.Drawing.Point(35, 252)
         Me.SelectBtn.Name = "SelectBtn"
         Me.SelectBtn.Size = New System.Drawing.Size(75, 25)
         Me.SelectBtn.TabIndex = 22
         Me.SelectBtn.Text = "Select"
-        Me.SelectBtn.UseVisualStyleBackColor = True
+        Me.SelectBtn.UseVisualStyleBackColor = False
         '
         'ReturnBtn
         '
@@ -123,7 +133,7 @@ Partial Class SelectOrder
         '
         Me.WorkOrderTxtBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.WorkOrderTxtBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.WorkOrderTxtBox.Location = New System.Drawing.Point(69, 43)
+        Me.WorkOrderTxtBox.Location = New System.Drawing.Point(74, 43)
         Me.WorkOrderTxtBox.Name = "WorkOrderTxtBox"
         Me.WorkOrderTxtBox.Size = New System.Drawing.Size(130, 31)
         Me.WorkOrderTxtBox.TabIndex = 31
@@ -134,7 +144,7 @@ Partial Class SelectOrder
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.Color.White
-        Me.Label5.Location = New System.Drawing.Point(16, 49)
+        Me.Label5.Location = New System.Drawing.Point(21, 49)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(51, 19)
         Me.Label5.TabIndex = 30
@@ -167,9 +177,10 @@ Partial Class SelectOrder
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
     Friend WithEvents RefreshBtn As System.Windows.Forms.Button
     Friend WithEvents SelectBtn As System.Windows.Forms.Button
-    Friend WithEvents WorkOrderNumber As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ReturnBtn As System.Windows.Forms.PictureBox
     Friend WithEvents HomeBtn As System.Windows.Forms.PictureBox
     Friend WithEvents WorkOrderTxtBox As System.Windows.Forms.TextBox
     Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents WorkOrder As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents BatchID As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class
