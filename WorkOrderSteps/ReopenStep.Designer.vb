@@ -22,6 +22,7 @@ Partial Class ReopenStep
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ReopenStep))
         Me.StepItemTxtBox = New System.Windows.Forms.TextBox()
         Me.StepNumberTxtBox = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -115,6 +116,7 @@ Partial Class ReopenStep
         Me.Controls.Add(Me.StepItemTxtBox)
         Me.Controls.Add(Me.StepNumberTxtBox)
         Me.Controls.Add(Me.Label1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "ReopenStep"
         Me.ResumeLayout(False)
         Me.PerformLayout()

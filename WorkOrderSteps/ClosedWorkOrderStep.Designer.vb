@@ -261,11 +261,11 @@ Partial Class ClosedWorkOrderStep
         '
         'ClosedWorkOrderStep
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.Black
         Me.ClientSize = New System.Drawing.Size(224, 281)
-        Me.ControlBox = false
+        Me.ControlBox = False
         Me.Controls.Add(Me.StepItemTxtBox)
         Me.Controls.Add(Me.StepItemDescTxtBox)
         Me.Controls.Add(Me.LotNumTxtBox)
@@ -284,6 +284,7 @@ Partial Class ClosedWorkOrderStep
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ReturnBtn)
         Me.Controls.Add(Me.HomeBtn)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "ClosedWorkOrderStep"
         CType(Me.ReturnBtn,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.HomeBtn,System.ComponentModel.ISupportInitialize).EndInit

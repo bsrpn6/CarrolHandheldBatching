@@ -240,6 +240,7 @@ Partial Class ClosedProcedureStep
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ReturnBtn)
         Me.Controls.Add(Me.HomeBtn)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "ClosedProcedureStep"
         CType(Me.ReturnBtn, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.HomeBtn, System.ComponentModel.ISupportInitialize).EndInit()

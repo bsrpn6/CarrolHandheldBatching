@@ -73,6 +73,7 @@ Partial Class Instructions
         Me.Controls.Add(Me.SkipStepBtn)
         Me.Controls.Add(Me.ReturnBtn)
         Me.Controls.Add(Me.InstructionsTxtBox)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Instructions"
         CType(Me.ReturnBtn, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

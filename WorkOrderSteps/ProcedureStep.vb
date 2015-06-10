@@ -1,8 +1,5 @@
 ﻿Option Strict Off
 Option Explicit On
-Imports System
-Imports System.Data
-Imports System.Data.Common
 Imports System.Data.SqlClient
 
 Public Class ProcedureStep
@@ -15,6 +12,7 @@ Public Class ProcedureStep
 
     Dim WorkOrderNumber As String
     Dim StepNumber As Integer
+    Dim BatchStepID As Integer
     Dim BatchID As Integer
 
     Dim StepType As String
@@ -38,7 +36,7 @@ Public Class ProcedureStep
 
         'Create a Command object.
         myCmd = myConn.CreateCommand
-        myCmd.CommandText = "SELECT [StepDispType], [ParamTarget], [ParamUOM], [StepInstructions] FROM [BatchDB].[dbo].[baBatchSteps] WHERE [BatchID] = " & BatchID & "AND [StepNum] = " & StepNumber
+        myCmd.CommandText = "SELECT [BatchStepID], [StepDispType], [ParamTarget], [ParamUOM], [StepInstructions] FROM [BatchDB].[dbo].[baBatchSteps] WHERE [BatchID] = " & BatchID & "AND [StepNum] = " & StepNumber
 
         'Open the connection.
         myConn.Open()
@@ -48,10 +46,24 @@ Public Class ProcedureStep
 
         'Concatenate the query result into a string.
         Do While myReader.Read()
-            StepType = myReader.GetString(0)
-            StepItemTarget = myReader.GetSqlSingle(1)
-            ParamUOM = myReader.GetString(2)
-            StepInstructions = myReader.GetString(3)
+            BatchStepID = myReader.GetSqlInt32(0)
+            StepType = myReader.GetString(1)
+
+            If Not IsDBNull(myReader.GetValue(2)) Then
+                StepItemTarget = myReader.GetSqlSingle(2)
+            Else
+                StepItemTxtBox.Visible = False
+            End If
+
+            If Not IsDBNull(myReader.GetValue(3)) Then
+                ParamUOM = myReader.GetString(3)
+            End If
+
+            If Not IsDBNull(myReader.GetValue(4)) Then
+                StepInstructions = myReader.GetString(4)
+            Else
+                InstructionsTxtBox.Visible = False
+            End If
         Loop
 
         StepNumberTxtBox.Text = WorkOrderNumber & " - " & StepNumber
@@ -87,48 +99,31 @@ Public Class ProcedureStep
     End Sub
 
     Private Sub SubmitBtn_Click(sender As Object, e As EventArgs) Handles SubmitBtn.Click
-        'Create a Connection object.
-        myConn = DatabaseConnection.CreateSQLConnection()
 
-        'Create a Command object.
-        myCmd = myConn.CreateCommand
-        myCmd.CommandText = "UPDATE [BatchDB].[dbo].[baBatchSteps] SET [StepStatus] = 'ACTV', [StepStartDate] = '" & Date.Now.ToString("yyyy-MM-dd HHH:mm:ss") & "' WHERE [BatchID] = " & BatchID & "AND [StepNum] = " & StepNumber
+        Dim ReturnValue As Integer
 
-        'Open the connection.
-        myConn.Open()
+        ReturnValue = DatabaseConnection.BatchUpdateStep(BatchID, BatchStepID, "ACTV", 0)
 
-        myReader = myCmd.ExecuteReader()
+        If ReturnValue = "0" Then
+            Dim oForm As CloseWorkOrderStep
+            oForm = New CloseWorkOrderStep(WorkOrderNumber, BatchID, StepNumber)
+            oForm.Show()
+            oForm = Nothing
 
-        'Close the reader and the database connection.
-        myReader.Close()
-        myConn.Close()
+            Close()
+        End If
 
-        Dim oForm As CloseWorkOrderStep
-        oForm = New CloseWorkOrderStep(WorkOrderNumber, BatchID, StepNumber)
-        oForm.Show()
-        oForm = Nothing
-
-        Close()
     End Sub
 
     Private Sub SkipStepBtn_Click(sender As Object, e As EventArgs) Handles SkipStepBtn.Click
         If MessageBox.Show("Are you sure you want to skip this step?", "Confirm", MessageBoxButtons.YesNo) Then
-            'Create a Connection object.
-            myConn = DatabaseConnection.CreateSQLConnection()
+            Dim ReturnValue As Integer
 
-            'Create a Command object.
-            myCmd = myConn.CreateCommand
-            myCmd.CommandText = "UPDATE [BatchDB].[dbo].[baBatchSteps] SET [StepStatus] = 'SKIP', [StepStartDate] = '" & Date.Now.ToString("yyyy-MM-dd HHH:mm:ss") & "', [StepEndDate] = '" & Date.Now.ToString("yyyy-MM-dd HHH:mm:ss") & "' WHERE [BatchID] = " & BatchID & "AND [StepNum] = " & StepNumber
+            ReturnValue = DatabaseConnection.BatchUpdateStep(BatchID, BatchStepID, "SKIP", 0)
 
-            'Open the connection.
-            myConn.Open()
-
-            myReader = myCmd.ExecuteReader()
-
-            'Close the reader and the database connection.
-            myReader.Close()
-            myConn.Close()
-            Close()
+            If ReturnValue = "0" Then
+                Close()
+            End If
 
         End If
     End Sub

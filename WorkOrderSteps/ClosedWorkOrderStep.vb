@@ -1,8 +1,5 @@
 ﻿Option Strict Off
 Option Explicit On
-Imports System
-Imports System.Data
-Imports System.Data.Common
 Imports System.Data.SqlClient
 
 Public Class ClosedWorkOrderStep

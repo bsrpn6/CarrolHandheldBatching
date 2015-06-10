@@ -18,6 +18,8 @@ C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\bin\Debug\Work
 C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\bin\Debug\WorkOrderSteps.exe
 C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\bin\Debug\WorkOrderSteps.pdb
 C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\bin\Debug\WorkOrderSteps.xml
+C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Debug\WindowsApplication1.SelectAsset.resources
+C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Debug\WindowsApplication1.StagingMain.resources
 C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Debug\WindowsApplication1.BatchMain.resources
 C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Debug\WindowsApplication1.CloseWorkOrderStep.resources
 C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Debug\WindowsApplication1.CloseBatch.resources
@@ -36,3 +38,4 @@ C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Debug\Work
 C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Debug\WorkOrderSteps.exe
 C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Debug\WorkOrderSteps.xml
 C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Debug\WorkOrderSteps.pdb
+C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Debug\WorkOrderSteps.vbprojResolveAssemblyReference.cache

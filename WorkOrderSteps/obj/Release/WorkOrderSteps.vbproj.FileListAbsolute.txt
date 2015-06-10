@@ -22,3 +22,6 @@ C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Release\Wo
 C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Release\WorkOrderSteps.exe
 C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Release\WorkOrderSteps.xml
 C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Release\WorkOrderSteps.pdb
+C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Release\WindowsApplication1.SelectAsset.resources
+C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Release\WindowsApplication1.StagingMain.resources
+C:\Users\admin\Source\Repos\CarrolHandheldBatching\WorkOrderSteps\obj\Release\WorkOrderSteps.vbprojResolveAssemblyReference.cache

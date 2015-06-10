@@ -1,8 +1,5 @@
 ﻿Option Strict Off
 Option Explicit On
-Imports System
-Imports System.Data
-Imports System.Data.Common
 Imports System.Data.SqlClient
 
 Public Class CloseWorkOrderStep
@@ -14,6 +11,7 @@ Public Class CloseWorkOrderStep
 
     Dim WorkOrderNumber As String
     Dim BatchID As Integer
+    Dim BatchStepID As Integer
     Dim StepNumber As Integer
     Dim ParamTarget As Single
     Dim ParamUOM As String
@@ -37,7 +35,7 @@ Public Class CloseWorkOrderStep
 
         'Create a Command object.
         myCmd = myConn.CreateCommand
-        myCmd.CommandText = "SELECT [StepStartDate], [ParamTarget], [ParamUOM] FROM [BatchDB].[dbo].[baBatchSteps] WHERE [BatchID] = " & BatchID & "AND [StepNum] = " & StepNumber
+        myCmd.CommandText = "SELECT [StepStartDate], [ParamTarget], [ParamUOM], [BatchStepID] FROM [BatchDB].[dbo].[baBatchSteps] WHERE [BatchID] = " & BatchID & "AND [StepNum] = " & StepNumber
 
         'Open the connection.
         myConn.Open()
@@ -46,8 +44,15 @@ Public Class CloseWorkOrderStep
 
         Do While myReader.Read
             StepStartTime = myReader.GetDateTime(0)
-            ParamTarget = myReader.GetSqlSingle(1)
-            ParamUOM = myReader.GetString(2)
+            If Not IsDBNull(myReader.GetValue(1)) Then
+                ParamTarget = myReader.GetSqlSingle(1)
+            End If
+
+            If Not IsDBNull(myReader.GetValue(2)) Then
+                ParamUOM = myReader.GetString(2)
+            End If
+
+            BatchStepID = myReader.GetSqlInt32(3)
         Loop
 
         'Close the reader and the database connection.
@@ -62,26 +67,23 @@ Public Class CloseWorkOrderStep
     End Sub
 
     Private Sub CloseStep()
-        myConn = DatabaseConnection.CreateSQLConnection()
+        Dim ReturnValue As Integer
 
-        'Create a Command object.
-        myCmd = myConn.CreateCommand
-        myCmd.CommandText = "UPDATE [BatchDB].[dbo].[baBatchSteps] SET [StepStatus] = 'COMP', [StepEndDate] = '" & Date.Now.ToString("yyyy-MM-dd HHH:mm:ss") & "', [ParamActual] = '" & DateDiff(DateInterval.Minute, StepStartTime, Date.Now) & "' WHERE [BatchID] = " & BatchID & "AND [StepNum] = " & StepNumber
+        ReturnValue = DatabaseConnection.BatchUpdateStep(BatchID, BatchStepID, "COMP", 0)
 
-        'Open the connection.
-        myConn.Open()
-
-        myReader = myCmd.ExecuteReader()
-
-        'Close the reader and the database connection.
-        myReader.Close()
-        myConn.Close()
+        If ReturnValue = "0" Then
+            Close()
+        ElseIf ReturnValue > 0 Then
+            Dim oForm As CloseBatch
+            oForm = New CloseBatch(WorkOrderNumber, BatchID)
+            oForm.Show()
+            oForm = Nothing
+        End If
 
     End Sub
 
     Private Sub YesBtn_Click(sender As Object, e As EventArgs) Handles YesBtn.Click
         CloseStep()
-        Close()
     End Sub
 
     Private Sub NoBtn_Click(sender As Object, e As EventArgs) Handles NoBtn.Click
@@ -101,21 +103,18 @@ Public Class CloseWorkOrderStep
     Private Sub AbortStepBtn_Click(sender As Object, e As EventArgs) Handles AbortStepBtn.Click
         If MessageBox.Show("Are you sure you want to abort?", "Confirm", MessageBoxButtons.YesNo) Then
 
-            myConn = DatabaseConnection.CreateSQLConnection()
+            Dim ReturnValue As Integer
 
-            'Create a Command object.
-            myCmd = myConn.CreateCommand
-            myCmd.CommandText = "UPDATE [BatchDB].[dbo].[baBatchSteps] SET [StepStatus] = 'ABRT', [StepEndDate] = '" & Date.Now.ToString("yyyy-MM-dd HHH:mm:ss") & "'  WHERE [BatchID] = " & BatchID & "AND [StepNum] = " & StepNumber
+            ReturnValue = DatabaseConnection.BatchUpdateStep(BatchID, BatchStepID, "ABRT", 0)
 
-            'Open the connection.
-            myConn.Open()
-
-            myReader = myCmd.ExecuteReader()
-
-            'Close the reader and the database connection.
-            myReader.Close()
-            myConn.Close()
-            Close()
+            If ReturnValue = "0" Then
+                Close()
+            ElseIf ReturnValue > 0 Then
+                Dim oForm As CloseBatch
+                oForm = New CloseBatch(WorkOrderNumber, BatchID)
+                oForm.Show()
+                oForm = Nothing
+            End If
         End If
     End Sub
 End Class

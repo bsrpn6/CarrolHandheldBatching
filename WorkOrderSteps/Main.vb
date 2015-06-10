@@ -4,12 +4,15 @@ Public Class Main
     Inherits System.Windows.Forms.Form
 
     Private Sub MainFrm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        TestSQLConnection()
         CenterToScreen()
+
+        VersionLbl.Text = "Ver: " & My.Application.Info.Version.ToString
     End Sub
 
     Private Sub SelectOrderBtn_Click(sender As Object, e As EventArgs) Handles SelectOrderBtn.Click
         Dim oForm As SelectOrder
-        oForm = New SelectOrder()
+        oForm = New SelectOrder(vbNull)
         oForm.Show()
         oForm = Nothing
     End Sub
@@ -18,32 +21,23 @@ Public Class Main
         Application.Exit()
     End Sub
 
-    Private Sub TestResetBtn_Click(sender As Object, e As EventArgs) Handles TestResetBtn.Click
-
+    Private Sub TestSQLConnection()
         Dim myConn As SqlConnection
-        Dim myCmd As SqlCommand
-        Dim myReader As SqlDataReader
-        'Create a Connection object.
         myConn = DatabaseConnection.CreateSQLConnection()
 
-        'Create a Command object.
-        myCmd = myConn.CreateCommand
-        myCmd.CommandText = "UPDATE [BatchDB].[dbo].[baBatchSteps] SET [StepStatus] = 'OPEN', [ParamActual] = NULL, [StepStartDate] = NULL, [StepEndDate] = NULL, [LotNumber] = NULL"
+        Try
+            myConn.Open()
+        Catch ex As Exception
+            MessageBox.Show("Cannont Connect To Instance of SQL." + vbCrLf + "Please verify that the application is configured for the correct instance of SQL Server and that your device has network connectivity.", "DB Connection Test", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Application.Exit()
+        End Try
 
-        'Open the connection.
-        myConn.Open()
+    End Sub
 
-        myReader = myCmd.ExecuteReader()
-
-        'Close the reader and the database connection.
-        myReader.Close()
-
-        myCmd.CommandText = "UPDATE [dbo].[baBatches] SET [BatchStatus] = 'OPEN', [BatchStartDate] = NULL, [BatchEndDate] = NULL"
-
-        myReader = myCmd.ExecuteReader
-
-        myConn.Close()
-
-        MessageBox.Show("Application has been reset.")
+    Private Sub SelectAssetBtn_Click(sender As Object, e As EventArgs) Handles SelectAssetBtn.Click
+        Dim oForm As SelectAsset
+        oForm = New SelectAsset(vbNull, vbNull)
+        oForm.Show()
+        oForm = Nothing
     End Sub
 End Class

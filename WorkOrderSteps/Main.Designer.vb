@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Main
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Main
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main))
         Me.SelectOrderBtn = New System.Windows.Forms.Button()
@@ -28,7 +28,7 @@ Partial Class Main
         Me.CloseApplication = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.TestResetBtn = New System.Windows.Forms.Button()
+        Me.VersionLbl = New System.Windows.Forms.Label()
         CType(Me.CloseApplication, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -37,7 +37,7 @@ Partial Class Main
         '
         Me.SelectOrderBtn.BackColor = System.Drawing.SystemColors.Control
         Me.SelectOrderBtn.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SelectOrderBtn.Location = New System.Drawing.Point(12, 87)
+        Me.SelectOrderBtn.Location = New System.Drawing.Point(12, 105)
         Me.SelectOrderBtn.Name = "SelectOrderBtn"
         Me.SelectOrderBtn.Size = New System.Drawing.Size(200, 32)
         Me.SelectOrderBtn.TabIndex = 5
@@ -48,7 +48,7 @@ Partial Class Main
         '
         Me.SelectAssetBtn.BackColor = System.Drawing.SystemColors.Control
         Me.SelectAssetBtn.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SelectAssetBtn.Location = New System.Drawing.Point(12, 125)
+        Me.SelectAssetBtn.Location = New System.Drawing.Point(12, 143)
         Me.SelectAssetBtn.Name = "SelectAssetBtn"
         Me.SelectAssetBtn.Size = New System.Drawing.Size(200, 32)
         Me.SelectAssetBtn.TabIndex = 6
@@ -84,16 +84,15 @@ Partial Class Main
         Me.Label1.TabIndex = 21
         Me.Label1.Text = "Batching System"
         '
-        'TestResetBtn
+        'VersionLbl
         '
-        Me.TestResetBtn.BackColor = System.Drawing.SystemColors.Control
-        Me.TestResetBtn.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TestResetBtn.Location = New System.Drawing.Point(12, 199)
-        Me.TestResetBtn.Name = "TestResetBtn"
-        Me.TestResetBtn.Size = New System.Drawing.Size(200, 32)
-        Me.TestResetBtn.TabIndex = 22
-        Me.TestResetBtn.Text = "TEST RESET"
-        Me.TestResetBtn.UseVisualStyleBackColor = False
+        Me.VersionLbl.AutoSize = True
+        Me.VersionLbl.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.VersionLbl.ForeColor = System.Drawing.Color.White
+        Me.VersionLbl.Location = New System.Drawing.Point(8, 257)
+        Me.VersionLbl.Name = "VersionLbl"
+        Me.VersionLbl.Size = New System.Drawing.Size(0, 14)
+        Me.VersionLbl.TabIndex = 22
         '
         'Main
         '
@@ -102,12 +101,13 @@ Partial Class Main
         Me.BackColor = System.Drawing.Color.Black
         Me.ClientSize = New System.Drawing.Size(224, 281)
         Me.ControlBox = False
-        Me.Controls.Add(Me.TestResetBtn)
+        Me.Controls.Add(Me.VersionLbl)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.CloseApplication)
         Me.Controls.Add(Me.SelectAssetBtn)
         Me.Controls.Add(Me.SelectOrderBtn)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Main"
         CType(Me.CloseApplication, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -120,5 +120,5 @@ Partial Class Main
     Friend WithEvents CloseApplication As System.Windows.Forms.PictureBox
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents TestResetBtn As System.Windows.Forms.Button
+    Friend WithEvents VersionLbl As Label
 End Class

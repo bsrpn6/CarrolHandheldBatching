@@ -165,6 +165,7 @@ Partial Class SelectOrder
         Me.Controls.Add(Me.SelectBtn)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.TitleLbl)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "SelectOrder"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ReturnBtn, System.ComponentModel.ISupportInitialize).EndInit()

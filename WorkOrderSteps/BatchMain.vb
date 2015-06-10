@@ -1,8 +1,5 @@
 ﻿Option Strict Off
 Option Explicit On
-Imports System
-Imports System.Data
-Imports System.Data.Common
 Imports System.Data.SqlClient
 
 Public Class BatchMain
@@ -10,9 +7,10 @@ Public Class BatchMain
     Private myCmd As SqlCommand
     Private myReader As SqlDataReader
 
+    Private fromIndex As Integer
+
     Private depConn As SqlConnection
     Private SQLDepCmd As SqlCommand
-
 
     Dim WorkOrderNumber As String
     Dim BatchID As Integer
@@ -195,17 +193,16 @@ Public Class BatchMain
                 oForm.Show()
                 oForm = Nothing
             Case "QA  "
-                ' MessageBox.Show("NEED TO CREATE SCREEN.")
+                Dim oForm As ProcedureStep
+                oForm = New ProcedureStep(WorkOrderNumber, StepNumber, BatchID)
+                oForm.Show()
+                oForm = Nothing
             Case "MIX "
                 Dim oForm As ProcedureStep
                 oForm = New ProcedureStep(WorkOrderNumber, StepNumber, BatchID)
                 oForm.Show()
                 oForm = Nothing
-            Case "CLOS"
-                Dim oForm As CloseBatch
-                oForm = New CloseBatch(WorkOrderNumber, BatchID)
-                oForm.Show()
-                oForm = Nothing
+
         End Select
     End Sub
 
@@ -216,10 +213,13 @@ Public Class BatchMain
         oForm = Nothing
     End Sub
 
-    Private Sub DataGridView1_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
-        SelectedValue = DataGridView1.Rows(e.RowIndex).Cells(0).Value
-        SelectedCompleteValue = DataGridView1.Rows(e.RowIndex).Cells(2).Value
-        SelectedStepTypeValue = DataGridView1.Rows(e.RowIndex).Cells(3).Value
+    Private Sub DataGridView1_MouseDown(sender As Object, e As MouseEventArgs) Handles DataGridView1.MouseDown
+
+        fromIndex = DataGridView1.HitTest(e.X, e.Y).RowIndex
+
+        SelectedValue = DataGridView1.Rows(fromIndex).Cells(0).Value
+        SelectedCompleteValue = DataGridView1.Rows(fromIndex).Cells(2).Value
+        SelectedStepTypeValue = DataGridView1.Rows(fromIndex).Cells(3).Value
 
         If IsDBNull(SelectedValue) Then
             SelectedStepOrder = "" ' blank if dbnull values
@@ -238,20 +238,21 @@ Public Class BatchMain
         Else
             SelectedStepType = CType(SelectedStepTypeValue, String)
         End If
+
     End Sub
 
     Private Sub RefreshBtn_Click(sender As Object, e As EventArgs) Handles RefreshBtn.Click
         ShowCompleteTglBtn.Text = "Show Completed"
         OpenORClosed = True
 
-        Call LoadSteps()
+        LoadSteps()
     End Sub
 
     Private Sub ActiveStepBtn_Click(sender As Object, e As EventArgs) Handles ActiveStepBtn.Click
         If NextStepStatus = "OPEN" Then
-            Call LoadOpenWorkOrderStep(WorkOrderNumber, NextStepNumber, NextStepType)
+            LoadOpenWorkOrderStep(WorkOrderNumber, NextStepNumber, NextStepType)
         ElseIf NextStepStatus = "ACTV" Then
-            Call LoadCloseWorkOrderStep(WorkOrderNumber, BatchID, NextStepNumber, NextStepType)
+            LoadCloseWorkOrderStep(WorkOrderNumber, BatchID, NextStepNumber, NextStepType)
         Else
             MessageBox.Show("No step available.")
         End If
@@ -278,7 +279,7 @@ Public Class BatchMain
                 Case "ACTV"
                     LoadCloseWorkOrderStep(WorkOrderNumber, BatchID, SelectedStepOrder, SelectedStepType)
                 Case "COMP"
-                    Call LoadClosedWorkOrderStep(WorkOrderNumber, SelectedStepOrder, SelectedStepType)
+                    LoadClosedWorkOrderStep(WorkOrderNumber, SelectedStepOrder, SelectedStepType)
                 Case "SKIP"
                     Dim oForm As ReopenStep
                     oForm = New ReopenStep(WorkOrderNumber, SelectedStepOrder, BatchID)
@@ -329,7 +330,6 @@ Public Class BatchMain
     End Sub
 
     Private Function DoesUserHavePermission() As Boolean
-
         Try
             Dim clientPermission As SqlClientPermission = New SqlClientPermission(Security.Permissions.PermissionState.Unrestricted)
 
@@ -337,14 +337,12 @@ Public Class BatchMain
             clientPermission.Demand()
 
             Return True
-
         Catch ex As Exception
-
             Return False
-
         End Try
 
         Return True
 
     End Function
+
 End Class

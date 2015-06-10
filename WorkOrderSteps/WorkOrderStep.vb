@@ -1,8 +1,5 @@
 ﻿Option Strict Off
 Option Explicit On
-Imports System
-Imports System.Data
-Imports System.Data.Common
 Imports System.Data.SqlClient
 
 
@@ -17,6 +14,7 @@ Public Class WorkOrderStep
 
     Dim WorkOrderNumber As String
     Dim StepNumber As Integer
+    Dim BatchStepID As Integer
     Dim BatchID As Integer
     Dim WorkOrderItem As String
     Dim WorkOrderItemDesc As String
@@ -26,6 +24,8 @@ Public Class WorkOrderStep
     Dim WorkOrderStepHiDev As Single
     Dim WorkOrderStepLoDev As Single
     Dim WorkOrderStepLoLoDev As Single
+    Dim StagedLotNumber As String
+    Dim StagedQty As Integer
     Dim ParamUOM As String
     Dim InstructionsNotViewed As Boolean = True
     Dim QtyTxtBoxHiLo As Boolean = False
@@ -48,7 +48,7 @@ Public Class WorkOrderStep
 
         'Create a Command object.
         myCmd = myConn.CreateCommand
-        myCmd.CommandText = "SELECT [StepItem] ,[StepItemDesc] ,[ParamTarget] ,[ParamHiHiDev] ,[ParamHiDev] ,[ParamLoDev] ,[ParamLoLoDev], [ParamUOM] FROM [BatchDB].[dbo].[baBatchSteps] WHERE [BatchID] = " & BatchID & "AND [StepNum] = " & StepNumber
+        myCmd.CommandText = "SELECT [BatchStepID], [StepItem] ,[StepItemDesc] ,[ParamTarget] ,[ParamHiHiDev] ,[ParamHiDev] ,[ParamLoDev] ,[ParamLoLoDev], [ParamUOM] FROM [BatchDB].[dbo].[baBatchSteps] WHERE [BatchID] = " & BatchID & "AND [StepNum] = " & StepNumber
 
         'Open the connection.
         myConn.Open()
@@ -58,14 +58,15 @@ Public Class WorkOrderStep
 
         'Concatenate the query result into a string.
         Do While myReader.Read()
-            WorkOrderItem = myReader.GetString(0)
-            WorkOrderItemDesc = myReader.GetString(1)
-            WorkOrderStepTargetQty = myReader.GetSqlSingle(2)
-            WorkOrderStepHiHiDev = myReader.GetSqlSingle(3)
-            WorkOrderStepHiDev = myReader.GetSqlSingle(4)
-            WorkOrderStepLoDev = myReader.GetSqlSingle(5)
-            WorkOrderStepLoLoDev = myReader.GetSqlSingle(6)
-            ParamUOM = myReader.GetString(7)
+            BatchStepID = myReader.GetSqlInt32(0)
+            WorkOrderItem = myReader.GetString(1)
+            WorkOrderItemDesc = myReader.GetString(2)
+            WorkOrderStepTargetQty = myReader.GetSqlSingle(3)
+            WorkOrderStepHiHiDev = myReader.GetSqlSingle(4)
+            WorkOrderStepHiDev = myReader.GetSqlSingle(5)
+            WorkOrderStepLoDev = myReader.GetSqlSingle(6)
+            WorkOrderStepLoLoDev = myReader.GetSqlSingle(7)
+            ParamUOM = myReader.GetString(8)
 
         Loop
 
@@ -76,6 +77,36 @@ Public Class WorkOrderStep
 
         'Close the reader and the database connection.
         myReader.Close()
+
+        myCmd.CommandText = "SELECT [BOMQtyStaged], [LotNumber] FROM [BatchDB].[dbo].[baBatchBOM] WHERE [BOMItem] = '" & WorkOrderItem & "' AND [BatchID] = " & BatchID
+
+        myReader = myCmd.ExecuteReader()
+
+
+        'Concatenate the query result into a string.
+        Do While myReader.Read()
+            If Not IsDBNull(myReader.GetValue(0)) Then
+                StagedQty = myReader.GetSqlSingle(0)
+            End If
+            If Not IsDBNull(myReader.GetValue(1)) Then
+                StagedLotNumber = myReader.GetSqlString(1)
+            End If
+        Loop
+
+        WorkOrderNumberTxtBox.Text = WorkOrderNumber & " - " & StepNumber
+        WorkOrderItemTxtBox.Text = WorkOrderItem
+        WorkOrderItemDescTxtBox.Text = WorkOrderItemDesc
+        WorkOrderStepTargetQtyTxtBox.Text = WorkOrderStepTargetQty & " " & ParamUOM
+
+        If StagedLotNumber <> "" Then
+            LotcodeTxtBox.Text = StagedLotNumber
+            QtyTxtBox.Text = StagedQty
+        End If
+
+        'Close the reader and the database connection.
+        myReader.Close()
+
+
         myConn.Close()
 
         CenterToScreen()
@@ -86,23 +117,9 @@ Public Class WorkOrderStep
     End Sub
 
     Private Sub Reset()
-        'WorkOrderNumberTxtBox.Text = ""
-        'WorkOrderItemTxtBox.Text = ""
-        'WorkOrderItemDescTxtBox.Text = ""
         WorkOrderStepItemTxtBox.Text = ""
-        'WorkOrderStepTargetQtyTxtBox.Text = ""
         LotcodeTxtBox.Text = ""
         QtyTxtBox.Text = ""
-        'WorkOrderNumber = ""
-        'WorkOrderItem = ""
-        'WorkOrderItemDesc = ""
-        'WorkOrderStepItem = ""
-        'WorkOrderStepItemDesc = ""
-        'WorkOrderStepTargetQty = vbNull
-        'WorkOrderStepHiHiDev = vbNull
-        'WorkOrderStepHiDev = vbNull
-        'WorkOrderStepLoDev = vbNull
-        'WorkOrderStepLoLoDev = vbNull
         WorkOrderStepItemTxtBox.BackColor = Color.FromArgb(224, 224, 224)
         QtyTxtBox.BackColor = Color.FromArgb(224, 224, 224)
         ViewInstructionsBtn.BackColor = Color.FromArgb(0, 192, 0)
@@ -111,7 +128,6 @@ Public Class WorkOrderStep
         WorkOrderStepItemIncorrect = False
         InstructionsNotViewed = True
         Call Timer_Stop_Check()
-        
     End Sub
 
     Private Sub ViewInstructionsBtn_Click(sender As Object, e As EventArgs) Handles ViewInstructionsBtn.Click
@@ -164,6 +180,7 @@ Public Class WorkOrderStep
             End If
         End If
     End Sub
+
     Private Sub Timer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyTimer.Tick
         Static HighBit As Boolean
 
@@ -205,32 +222,22 @@ Public Class WorkOrderStep
     Public Sub SubmitBtn_Click(sender As Object, e As EventArgs) Handles SubmitBtn.Click
 
         If WorkOrderStepItemTxtBox.Text > "" And LotcodeTxtBox.Text > "" And QtyTxtBox.Text > "" Then
-            'Create a Connection object.
-            myConn = DatabaseConnection.CreateSQLConnection()
 
-            'Create a Command object.
-            myCmd = myConn.CreateCommand
-            myCmd.CommandText = "UPDATE [BatchDB].[dbo].[baBatchSteps] SET [LotNumber] = ' " & LotcodeTxtBox.Text & " ', [ParamActual] = ' " & QtyTxtBox.Text & " ', [StepStatus] = 'ACTV', [StepStartDate] = '" & Date.Now.ToString("yyyy-MM-dd HHH:mm:ss") & "' WHERE [BatchID] = " & BatchID & "AND [StepNum] = " & StepNumber
+            Dim ReturnValue As Integer
 
-            'Open the connection.
-            myConn.Open()
+            ReturnValue = DatabaseConnection.BatchUpdateStep(BatchID, BatchStepID, "ACTV", 0, QtyTxtBox.Text, LotcodeTxtBox.Text)
 
-            myReader = myCmd.ExecuteReader()
+            If ReturnValue = "0" Then
+                Dim oForm As CloseWorkOrderStep
+                oForm = New CloseWorkOrderStep(WorkOrderNumber, BatchID, StepNumber)
+                oForm.Show()
+                oForm = Nothing
 
-            'Close the reader and the database connection.
-            myReader.Close()
-            myConn.Close()
-
-            Dim oForm As CloseWorkOrderStep
-            oForm = New CloseWorkOrderStep(WorkOrderNumber, BatchID, StepNumber)
-            oForm.Show()
-            oForm = Nothing
-
-            Close()
+                Close()
+            End If
         Else
             MessageBox.Show("Please provide required information.")
         End If
-
 
     End Sub
 

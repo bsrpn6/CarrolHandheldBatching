@@ -116,7 +116,7 @@ Partial Class WorkOrderStep
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.Color.White
-        Me.Label7.Location = New System.Drawing.Point(21, 220)
+        Me.Label7.Location = New System.Drawing.Point(21, 219)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(46, 19)
         Me.Label7.TabIndex = 7
@@ -186,7 +186,7 @@ Partial Class WorkOrderStep
         '
         Me.QtyTxtBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.QtyTxtBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.QtyTxtBox.Location = New System.Drawing.Point(74, 214)
+        Me.QtyTxtBox.Location = New System.Drawing.Point(74, 213)
         Me.QtyTxtBox.Name = "QtyTxtBox"
         Me.QtyTxtBox.Size = New System.Drawing.Size(130, 31)
         Me.QtyTxtBox.TabIndex = 16
@@ -270,6 +270,7 @@ Partial Class WorkOrderStep
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "WorkOrderStep"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         CType(Me.HomeBtn, System.ComponentModel.ISupportInitialize).EndInit()
